@@ -48,12 +48,12 @@
 
                 <div class="d-flex justify-content-between mb-2">
                     <h4><i class="fa fa-users"></i> @lang('dashboard.customers')</h4>
-                    <a href="http://127.0.0.1:8000/admin/genres">Show all ...</a>
+                    <a href="{{ route('customers.index') }}">Show all ...</a>
                 </div>
 
                 <div class="loader loader-sm" style="display: none;"></div>
 
-                <h3 class="mb-0" id="genres-count" style="">0.0</h3>
+                <h3 class="mb-0" id="genres-count" style="">{{ $customers }}</h3>
             </div>
 
         </div>
@@ -68,12 +68,12 @@
 
                 <div class="d-flex justify-content-between mb-2">
                   <h4><i class="fa fa-car"></i> @lang('drivers.drivers')</h4>
-                    <a href="http://127.0.0.1:8000/admin/movies">Show all ...</a>
+                    <a href="{{ route('drivers.index') }}">Show all ...</a>
                 </div>
 
                 <div class="loader loader-sm" style="display: none;"></div>
 
-                <h3 class="mb-0" id="movies-count" style="">0.0</h3>
+                <h3 class="mb-0" id="movies-count" style="">{{ $drivers }}</h3>
             </div>
 
         </div>
@@ -88,12 +88,12 @@
 
                 <div class="d-flex justify-content-between mb-2">
                   <h4><i class="fa fa-road"></i> @lang('trips.trips')</h4>
-                    <a href="http://127.0.0.1:8000/admin/actors">Show all ...</a>
+                    <a href="{{ route('trips.index') }}">Show all ...</a>
                 </div>
 
                 <div class="loader loader-sm" style="display: none;"></div>
 
-                <h3 class="mb-0" id="actors-count" style="">0.0</h3>
+                <h3 class="mb-0" id="actors-count" style="">{{ $trips }}</h3>
             </div>
 
         </div>
@@ -114,12 +114,12 @@
 
               <div class="d-flex justify-content-between mb-2">
                   <h4><i class="fa fa-star"></i> @lang('dashboard.reviews')</h4>
-                  <a href="http://127.0.0.1:8000/admin/genres">Show all ...</a>
+                  <a href="{{ route('reviews.index') }}">Show all ...</a>
               </div>
 
               <div class="loader loader-sm" style="display: none;"></div>
 
-              <h3 class="mb-0" id="genres-count" style="">0.0</h3>
+              <h3 class="mb-0" id="genres-count" style="">{{ $reviews }}</h3>
           </div>
 
       </div>
@@ -134,19 +134,19 @@
 
               <div class="d-flex justify-content-between mb-2">
                 <h4><i class="fa fa-bus"></i> @lang('daily-trips.daily-trips')</h4>
-                  <a href="http://127.0.0.1:8000/admin/movies">Show all ...</a>
+                  <a href="{{ route('daily-trips.index') }}">Show all ...</a>
               </div>
 
               <div class="loader loader-sm" style="display: none;"></div>
 
-              <h3 class="mb-0" id="movies-count" style="">0.0</h3>
+              <h3 class="mb-0" id="movies-count" style="">{{ $daily_trips }}</h3>
           </div>
 
       </div>
 
   </div><!-- end of col -->
 
-  <div class="col-md-4">
+  {{-- <div class="col-md-4">
 
       <div class="card">
 
@@ -154,7 +154,7 @@
 
               <div class="d-flex justify-content-between mb-2">
                 <h4><i class="fa fa-money"></i> @lang('balances.balance')</h4>
-                  <a href="http://127.0.0.1:8000/admin/actors">Show all ...</a>
+                  <a href="daily_trips">Show all ...</a>
               </div>
 
               <div class="loader loader-sm" style="display: none;"></div>
@@ -164,7 +164,7 @@
 
       </div>
 
-  </div><!-- end of col -->
+  </div><!-- end of col --> --}}
 
 </div>
 @endsection

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <x-master.title icon="fa fa-list">  @lang('site.balance-list')</x-master.title>
+    <x-master.title icon="fa fa-circle-o">  @lang('balances.tax-rate')</x-master.title>
 
 
     <div class="row">
@@ -11,23 +11,42 @@
 
             <div class="tile shadow">
 
-                <div class="row mb-2">
+                        <div class="row">
 
-                    <div class="col-md-12">
-
-                            {{-- <a href="{{ route('balances.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.create')</a> --}}
-
-                            {{-- <form method="post" action="{{ route('services.bulk_delete') }}" style="display: inline-block;">
-                                @csrf
-                                @method('delete')
-                                <input type="hidden" name="record_ids" id="record-ids">
-                                <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i class="fa fa-trash"></i> @lang('site.bulk_delete')</button>
-                            </form><!-- end of form --> --}}
-
-                    </div>
-
-                </div><!-- end of row -->
-
+                            <div class="col-md-4">
+                            
+                                <div class="card">
+                            
+                                    <div class="card-body">
+                            
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <h4><i class="fa fa-money"> </i> @lang('balances.current-tax')</h4>
+                                            {{-- <a href="http://127.0.0.1:8000/customers">Show all ...</a> --}}
+                                        </div>
+                            
+                                        <div class="loader loader-sm" style="display: none;"></div>
+                            
+                                        <h3 class="mb-0" id="genres-count" style="">{{ $tax_rate->tax_rate }}%</h3>
+                                    </div>
+                            
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <br>
+                        <form method="post" action="{{ route('tax.store') }}">
+                            @csrf
+                            
+                            <div class="form-group col-md-6">
+                                <label>@lang('balances.tax-rate') <span class="text-danger">*</span></label>
+                                <input type="number" step="0.01" name="tax_rate" autofocus class="form-control">
+                            </div>
+                        
+                            <div class="form-group col-md">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>@lang('site.update')</button>
+                            </div>
+                        
+                        </form><!-- end of form -->
 
             </div><!-- end of tile -->
 
@@ -40,8 +59,6 @@
 @push('scripts')
 
     <script>
-
-        let role;
 
         let table = $('#table').DataTable({
             dom: "tiplr",
@@ -58,7 +75,7 @@
                 {data: 'drivers', name: 'drivers'},
                 {data: 'balance', name: 'balance'},
                 {data: 'tax', name: 'tax'},
-                {data: 'tax_rate', name: 'tax_rate'},
+                {data: 'tax_rate_id', name: 'tax_rate_id'},
                 {data: 'created_at', name: 'created_at', searchable: false},
                 // {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],

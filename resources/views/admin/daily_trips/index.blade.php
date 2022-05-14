@@ -1,8 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-
-    <x-master.title icon="fa fa-bus">  @lang('site.daily-trips')</x-master.title>
+    <x-master.title icon="fa fa-bus"> @lang('site.daily-trips')</x-master.title>
 
 
     <div class="row">
@@ -32,7 +31,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input type="search" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
+                            <input type="search" id="data-table-search" class="form-control" autofocus
+                                placeholder="@lang('site.search')">
                         </div>
                     </div>
 
@@ -47,8 +47,8 @@
 
                             <table class="table datatable" id="table" style="width: 100%;">
                                 <thead>
-                                <tr>
-                                    {{-- <th>
+                                    <tr>
+                                        {{-- <th>
                                         <div class="animated-checkbox">
                                             <label class="m-0">
                                                 <input type="checkbox" id="record__select-all">
@@ -56,16 +56,16 @@
                                             </label>
                                         </div>
                                     </th> --}}
-                                    <th>@lang('trips.pickup')</th>
-                                    <th>@lang('trips.dropoff')</th>
-                                    <th>@lang('trips.distance')</th>
-                                    <th>@lang('trips.cost')</th>
-                                    <th>@lang('trips.week-days')</th>
-                                    <th>@lang('trips.customer')</th>
-                                    <th>@lang('drivers.driver')</th>
-                                    <th>@lang('site.created_at')</th>
-                                    <th>@lang('site.action')</th>
-                                </tr>
+                                        <th>@lang('trips.pickup')</th>
+                                        <th>@lang('trips.dropoff')</th>
+                                        <th>@lang('trips.distance')</th>
+                                        <th>@lang('trips.cost')</th>
+                                        <th>@lang('trips.week-days')</th>
+                                        <th>@lang('trips.customer')</th>
+                                        <th>@lang('drivers.driver')</th>
+                                        <th>@lang('site.created_at')</th>
+                                        <th>@lang('site.action')</th>
+                                    </tr>
                                 </thead>
                             </table>
 
@@ -82,7 +82,8 @@
     </div><!-- end of row -->
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,7 +99,9 @@
                             <input type="hidden" name="id" id="data-id" class="form-control">
                         </div>
                         <h4>@lang('site.send') @lang('site.request')</h4>
-                        <p id="data-name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi itaque aperiam sapiente ut consequuntur sit voluptatum possimus labore officia facere consequatur quibusdam, natus placeat quaerat odit inventore excepturi cupiditate nulla.</p>
+                        <p id="data-name">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi itaque aperiam
+                            sapiente ut consequuntur sit voluptatum possimus labore officia facere consequatur quibusdam,
+                            natus placeat quaerat odit inventore excepturi cupiditate nulla.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('site.close')</button>
@@ -109,13 +112,10 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @push('scripts')
-
     <script>
-
         let status;
 
         let dailytripsTable = $('#table').DataTable({
@@ -127,40 +127,72 @@
             },
             ajax: {
                 url: '{{ route('daily-trips.data') }}',
-                data:function(d){
+                data: function(d) {
                     d.status_id = status;
                 }
             },
-            columns: [
-                {data: 'pickup_address', name: 'pickup_address'},
-                {data: 'dropoff_address', name: 'dropoff_address'},
-                {data: 'distance', name: 'distance'},
-                {data: 'cost', name: 'cost'},
-                {data: 'week_days', name: 'week_days'},
-                {data: 'customer', name: 'customer'},
-                {data: 'driver', name: 'driver', width: '16%'},
-                {data: 'created_at', name: 'created_at', searchable: false, width: '25%'},
-                {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
+            columns: [{
+                    data: 'pickup_address',
+                    name: 'pickup_address'
+                },
+                {
+                    data: 'dropoff_address',
+                    name: 'dropoff_address'
+                },
+                {
+                    data: 'distance',
+                    name: 'distance'
+                },
+                {
+                    data: 'cost',
+                    name: 'cost'
+                },
+                {
+                    data: 'week_days',
+                    name: 'week_days'
+                },
+                {
+                    data: 'customer',
+                    name: 'customer'
+                },
+                {
+                    data: 'driver',
+                    name: 'driver',
+                    width: '16%'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
+                    searchable: false,
+                    width: '25%'
+                },
+                {
+                    data: 'actions',
+                    name: 'actions',
+                    searchable: false,
+                    sortable: false,
+                    width: '20%'
+                },
             ],
-            order: [[4, 'desc']],
-            drawCallback: function (settings) {
+            order: [
+                [4, 'desc']
+            ],
+            drawCallback: function(settings) {
                 // $('#record__select-all').prop('checked', false);
                 // $('#record-ids').val();
                 // $('#bulk-delete').attr('disabled', true);
             }
         });
 
-        $('#data-table-search').keyup(function () {
+        $('#data-table-search').keyup(function() {
             dailytripsTable.search(this.value).draw();
         })
 
-        
+
         // $('#status').on('change', function () {
         //     status = this.value;
         //     dailytripsTable.ajax.reload();
         //     console.log(status);
         // })
-
     </script>
-
 @endpush

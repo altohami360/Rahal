@@ -6,7 +6,7 @@
         <img class="app-sidebar__user-avatar" src="{{ asset('uploads\images\users\\' . auth()->user()->image) }}" alt="User Image">
         <div>
             <p class="app-sidebar__user-name">{{ auth()->user()->name }}</p>
-            <p class="app-sidebar__user-designation">{{ auth()->user()->roles->first()->name }}</p>
+            <p class="app-sidebar__user-designation">{{ auth()->user()->roles->first()->name ?? '' }}</p>
         </div>
     </div>
 
@@ -59,12 +59,12 @@
             </a>
         </li>
 
-        <li class="treeview {{ request()->is('*balances*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-money"></i><span class="app-menu__label">@lang('site.accounting')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+        <li class="treeview {{ request()->is('*accounting*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-money"></i><span class="app-menu__label">@lang('site.accounting')</span><i class="treeview-indicator fa fa-angle-right"></i></a>
             <ul class="treeview-menu">
                 <li><a class="treeview-item" href="{{ route('balances.index') }}"><i class="icon fa fa-circle-o"></i>@lang('site.balance-list')</a></li>
             </ul>
             <ul class="treeview-menu">
-                <li><a class="treeview-item" href="{{ route('balances.index') }}"><i class="icon fa fa-circle-o"></i>@lang('site.tax-determination')</a></li>
+                <li><a class="treeview-item" href="{{ route('tax.index') }}"><i class="icon fa fa-circle-o"></i>@lang('site.tax-determination')</a></li>
             </ul>
         </li>
         

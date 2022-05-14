@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('tax_rates', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('avatar')->nullable();
-            $table->foreignId('gender_id')->constrained()->onDelete('cascade');
-            $table->boolean('is_active')->default(true);
+            $table->double('tax_rate', 8, 2);
+            $table->boolean('is_active');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('tax_rates');
     }
 };

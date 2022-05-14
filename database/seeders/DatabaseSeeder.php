@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         
         $this->call([
             LaratrustSeeder::class,
+            UserSeeder::class,
             ServiceSeeder::class,
             CarTypeSeeder::class,
             GenderSeeder::class,
@@ -32,7 +33,8 @@ class DatabaseSeeder extends Seeder
             CarSeeder::class,
             DriverSeeder::class,
             TripSeeder::class,
-            DailyTripSeeder::class
+            DailyTripSeeder::class,
+            TaxRateSeeder::class
         ]);
 
 

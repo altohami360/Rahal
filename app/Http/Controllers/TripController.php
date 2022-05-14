@@ -72,9 +72,10 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $Trip
      * @return \Illuminate\Http\Response
      */
-    public function show(Trip $Trip)
+    public function show(Trip $trip)
     {
-        //
+        $statuses = Status::all();
+        return view('admin.trips.show', compact('trip', 'statuses'));
     }
 
     /**

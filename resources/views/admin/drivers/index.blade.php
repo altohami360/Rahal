@@ -62,7 +62,7 @@
                                     <th>@lang('users.name')</th>
                                     {{-- <th>@lang('users.email')</th> --}}
                                     <th>@lang('drivers.gender')</th>
-                                    <th>@lang('drivers.service')</th>
+                                    {{-- <th>@lang('drivers.service')</th> --}}
                                     <th>@lang('balances.balance')</th>
                                     <th>@lang('drivers.trips-count')</th>
                                     <th>@lang('drivers.active') ?</th>
@@ -143,7 +143,7 @@
                 {data: 'name', name: 'name'},
                 // {data: 'email', name: 'email'},
                 {data: 'gender', name: 'gender'},
-                {data: 'service', name: 'service'},
+                // {data: 'service', name: 'service'},
                 {data: 'balance', name: 'balance', width: '14%'},
                 {data: 'trips_count', name: 'trips_count'},
                 {data: 'is_active', name: 'is_active'},

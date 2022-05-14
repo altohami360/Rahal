@@ -31,7 +31,7 @@ class DriverFactory extends Factory
             'gender_id' => rand(1,2), 
             'nationality_id' => rand(1,2), 
             'car_id' => rand(1,3), 
-            'service_id' => rand(1,3), 
+            // 'service_id' => rand(1,3), 
             'is_active' => $this->faker->boolean(),
         ];
     }

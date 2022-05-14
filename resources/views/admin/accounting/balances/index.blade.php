@@ -58,6 +58,7 @@
                                     <th>@lang('users.user')</th>
                                     <th>@lang('drivers.driver')</th>
                                     <th>@lang('balances.balance')</th>
+                                    <th>@lang('balances.net-balance')</th>
                                     <th>@lang('balances.tax')</th>
                                     <th>@lang('balances.tax-rate')</th>
                                     <th>@lang('site.created_at')</th>
@@ -100,9 +101,10 @@
                 {data: 'users', name: 'users'},
                 {data: 'drivers', name: 'drivers'},
                 {data: 'balance', name: 'balance'},
+                {data: 'net_balance', name: 'net_balance'},
                 {data: 'tax', name: 'tax'},
-                {data: 'tax_rate', name: 'tax_rate'},
-                {data: 'created_at', name: 'created_at', searchable: false},
+                {data: 'tax_rate_id', name: 'tax_rate_id'},
+                {data: 'created_at', name: 'created_at', searchable: false, sortable: true},
                 // {data: 'actions', name: 'actions', searchable: false, sortable: false, width: '20%'},
             ],
             order: [[4, 'desc']],

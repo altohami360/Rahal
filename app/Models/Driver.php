@@ -24,13 +24,13 @@ class Driver extends Model
         'current_balance',
         'nationality_id', 
         'car_id', 
-        'service_id', 
+        // 'service_id', 
         'is_active'
     ];
 
     protected $appends = ['age'];
 
-    protected $casts = ['created_at' => 'datetime:Y-m-d h:m'];
+    protected $casts = ['created_at' => 'datetime:Y-m-d'];
 
     public function getAgeAttribute()
     {
@@ -52,10 +52,10 @@ class Driver extends Model
         return $this->hasOne(Car::class);
     }
 
-    public function service()
-    {
-        return $this->belongsTo(Service::class);
-    }
+    // public function service()
+    // {
+    //     return $this->belongsTo(Service::class);
+    // }
 
     
     public function balances()

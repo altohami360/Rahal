@@ -1,3 +1,3 @@
 {{-- @if (auth()->user()->hasPermission('up/date_admins')) --}}
-    <a href="{{ route('reviews.show', $id) }}" class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></a>
+    <a href="" class="btn btn-info btn-sm"><i class="fa fa-folder-open"></i></a>
 {{-- @endif --}}

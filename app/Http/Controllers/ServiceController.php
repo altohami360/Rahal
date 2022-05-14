@@ -123,6 +123,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        // $service = Service::findOrFail($id);
         $service->delete();
+        // dd($service);
     }
 }

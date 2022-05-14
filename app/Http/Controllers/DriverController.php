@@ -54,8 +54,7 @@ class DriverController extends Controller
                 return view('admin.drivers.data_table.is_active', compact('driver'));
             })
             ->addColumn('gender', fn(Driver $driver) => $driver->gender->gender)
-            ->addColumn('service', fn(Driver $driver) => $driver->service->service)
-            // ->addColumn('balance', fn(Driver $driver) =>' <b></b> <a href="" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> '. $driver->current_balance .' RS</a>')
+            // ->addColumn('service', fn(Driver $driver) => $driver->service->service)
             ->rawColumns(['record_select','balance', 'actions', 'is_active'])
             ->toJson();
 

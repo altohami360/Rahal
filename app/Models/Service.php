@@ -16,10 +16,10 @@ class Service extends Model
 
     protected $casts = ['created_at' => 'datetime:Y-m-d'];
 
-    public function drivers()
-    {
-        return $this->hasMany(Driver::class);
-    }
+    // public function drivers()
+    // {
+    //     return $this->hasMany(Driver::class);
+    // }
 
     public function trips()
     {

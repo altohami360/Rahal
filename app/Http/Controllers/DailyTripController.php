@@ -71,7 +71,7 @@ class DailyTripController extends Controller
      */
     public function show(dailyTrip $dailyTrip)
     {
-        //
+        return view('admin.daily_trips.show', compact('dailyTrip'));
     }
 
     /**

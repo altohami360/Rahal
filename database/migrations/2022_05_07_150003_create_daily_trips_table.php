@@ -33,8 +33,8 @@ return new class extends Migration
             $table->time('time_back')->nullable();
             $table->json('week_days');
 
-            $table->foreignId('driver_id')->nullable()->constrained();
-            $table->foreignId('customer_id')->constrained();
+            $table->foreignId('driver_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });

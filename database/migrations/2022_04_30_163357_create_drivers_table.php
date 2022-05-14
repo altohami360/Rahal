@@ -25,10 +25,10 @@ return new class extends Migration
             $table->double('current_balance', 8, 2)->default(9.99);
             $table->string('image');
             $table->string('identification_card_image');
-            $table->foreignId('gender_id')->constrained();
-            $table->foreignId('nationality_id')->constrained();
-            $table->foreignId('car_id')->constrained();
-            $table->foreignId('service_id')->constrained();
+            $table->foreignId('gender_id')->constrained()->onDelete('cascade');
+            $table->foreignId('nationality_id')->constrained()->onDelete('cascade');
+            $table->foreignId('car_id')->constrained()->onDelete('cascade');
+            // $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });

@@ -56,8 +56,8 @@
                                         </div>
                                     </th> --}}
                                     <th>@lang('users.name')</th>
-                                    <th>@lang('users.rating')</th>
-                                    <th>@lang('users.comment')</th>
+                                    <th>@lang('reviews.star')</th>
+                                    <th>@lang('reviews.comment')</th>
                                     {{-- <th>@lang('customer.trips_count')</th> --}}
                                     <th>@lang('site.created_at')</th>
                                     <th>@lang('site.action')</th>
@@ -83,8 +83,6 @@
 
     <script>
 
-        let role;
-
         let reviewsTable = $('#table').DataTable({
             dom: "tiplr",
             serverSide: true,
@@ -94,9 +92,6 @@
             },
             ajax: {
                 url: '{{ route('reviews.data') }}',
-                data: function (d) {
-                    d.role_id = role;
-                }
             },
             columns: [
                 {data: 'customers', name: 'customer.name'},

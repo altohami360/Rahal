@@ -16,10 +16,11 @@ return new class extends Migration
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
             $table->double('balance', 8, 2);
-            $table->double('tax_rate', 8, 2);
+            $table->double('net_balance', 8, 2);
             $table->double('tax', 8, 2);
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('driver_id')->constrained();
+            $table->foreignId('tax_rate_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('driver_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

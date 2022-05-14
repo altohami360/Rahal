@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Balance;
 use App\Models\Driver;
+use App\Models\Tax;
+use App\Models\TaxRate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use phpDocumentor\Reflection\Types\Boolean;
 use Yajra\DataTables\DataTables;
 
 class BalanceController extends Controller
@@ -23,43 +26,49 @@ class BalanceController extends Controller
 
     public function data()
     {
-        
+
         $balances = Balance::all()->sortByDesc('created_at');
 
         return DataTables::of($balances)
-            ->addColumn('drivers', fn(Balance $balance) => $balance->driver->name)
+            ->addColumn('drivers', fn (Balance $balance) => $balance->driver->name)
             ->addColumn('users', fn (Balance $balance) => $balance->user->name)
-            ->addColumn('balance',   fn(Balance $balance) => '<b>'. $balance->balance .'</b><sub>SAR</sub>')
-            ->addColumn('tax',   fn(Balance $balance) => '<b>'. $balance->tax .'</b><sub>SAR</sub>')
-            ->addColumn('tax_rate',   fn(Balance $balance) => '<b>'. $balance->tax_rate .'</b>%')
+            ->addColumn('net_balance', fn (Balance $balance) => '<b>' . $balance->net_balance . '</b><sub>SAR</sub>')
+            ->addColumn('balance', fn (Balance $balance) => '<b>' . $balance->balance . '</b><sub>SAR</sub>')
+            ->addColumn('tax',   fn (Balance $balance) => '<b>' . $balance->tax . '</b><sub>SAR</sub>')
+            ->addColumn('tax_rate_id',   fn (Balance $balance) => '<b>' . $balance->taxRate->tax_rate . '</b>%')
             // ->addColumn('actions', 'admin.accounting.balances.data_table.actions')
-            ->rawColumns(['tax', 'tax_rate', 'balance'])
+            ->rawColumns(['tax', 'tax_rate_id', 'balance', 'net_balance'])
             ->toJson();
     }
 
     public function recharge(Request $request)
     {
         // dd($request->balance);
-        
+
         $request->validate([
             'balance' => 'required',
         ]);
 
-        // Calc The Tax
-        $tax_rate = 10;
-        $tax = ($request->balance * $tax_rate) / 100;
+        $tax_rate = TaxRate::where('is_active', true)->first();
+
+        $balance = $request->balance;
+
+        $tax = ($tax_rate->tax_rate * $balance) / 100;
         
-        //Update Balance of Driver (- tax)
+        $net_balance = $balance - $tax;
+
+
+        //Update Balance of Driver
         $driver = Driver::findOrFail($request->driver_id);
-        $newBalance = $request->balance - $tax;
-        $driver->current_balance += $newBalance;
+        $driver->current_balance += $net_balance;
         $driver->update();
 
         // Create Balance in History
         Balance::create([
-            'balance' => $newBalance,
+            'balance' => $balance,
+            'net_balance' => $net_balance,
             'tax' => $tax,
-            'tax_rate' => $tax_rate,
+            'tax_rate_id' => $tax_rate->id,
             'driver_id' => $request->driver_id,
             'user_id' => Auth::id(),
         ]);
@@ -91,7 +100,7 @@ class BalanceController extends Controller
             'driver_id' => 'required',
             'balance' => 'required',
         ]);
-        
+
         $driver = Driver::findOrFail($request->driver_id);
         $driver->current_balance += $request->balance;
         $driver->update();
@@ -106,7 +115,6 @@ class BalanceController extends Controller
             'driver_id' => $request->driver_id,
             'user_id' => Auth::id(),
         ]);
-
     }
 
     /**

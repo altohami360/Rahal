@@ -25,7 +25,7 @@ class Trip extends Model
         'status_id'
     ];
 
-    protected $casts = ['created_at' => 'datetime:Y-m-d h:m'];
+    protected $casts = ['created_at' => 'datetime:Y-m-d'];
 
     public function service()
     {

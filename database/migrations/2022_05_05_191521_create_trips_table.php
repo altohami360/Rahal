@@ -27,11 +27,11 @@ return new class extends Migration
             $table->longText('note');
             $table->double('distance');
             $table->double('cost');
-            
-            $table->foreignId('service_id')->constrained();
-            $table->foreignId('driver_id')->constrained();
-            $table->foreignId('customer_id')->constrained();
-            $table->foreignId('status_id')->constrained();
+
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
+            $table->foreignId('driver_id')->constrained()->onDelete('cascade');
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
+            $table->foreignId('status_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

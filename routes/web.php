@@ -12,8 +12,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\TaxRateController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,8 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Auth::route(['register' => false]);
+
 Route::middleware('auth')->group(function() {
         
     Route::redirect('/', 'dashboard');
@@ -39,17 +43,14 @@ Route::middleware('auth')->group(function() {
 
     //Role routes
     Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
-    Route::delete('/roles/bulk_delete', [RoleController::class ,'bulkDelete'])->name('roles.bulk_delete');
     Route::resource('roles', RoleController::class);
 
     //User routes
     Route::get('/users/data', [UserController::class, 'data'])->name('users.data');
-    Route::delete('/users/bulk_delete', [UserController::class, 'bulkDelete'])->name('users.bulk_delete');
     Route::resource('users', UserController::class);
 
     //Driver routes
     Route::get('/drivers/data', [DriverController::class, 'data'])->name('drivers.data');
-    Route::delete('/drivers/bulk_delete', [DriverController::class, 'bulkDelete'])->name('drivers.bulk_delete');
     Route::resource('drivers', DriverController::class);
 
     //Customer routes
@@ -58,17 +59,14 @@ Route::middleware('auth')->group(function() {
 
     //Trips routes
     Route::get('/trips/data', [TripController::class, 'data'])->name('trips.data');
-    Route::delete('/trips/bulk_delete', [TripController::class, 'bulkDelete'])->name('trips.bulk_delete');
     Route::resource('trips', TripController::class);
 
     //Daily trips routes
     Route::get('/daily-trips/data', [DailyTripController::class, 'data'])->name('daily-trips.data');
-    Route::delete('/daily-trips/bulk_delete', [DailyTripController::class, 'bulkDelete'])->name('daily-trips.bulk_delete');
     Route::resource('daily-trips', DailyTripController::class);
 
     //Service routes
     Route::get('/services/data', [ServiceController::class, 'data'])->name('services.data');
-    Route::delete('/services/bulk_delete', [ServiceController::class, 'bulkDelete'])->name('services.bulk_delete');
     Route::resource('services', ServiceController::class);
 
     //Reviews routes
@@ -76,9 +74,13 @@ Route::middleware('auth')->group(function() {
     Route::resource('reviews', ReviewController::class)->only(['index', 'show']);
 
     //Balances routes
-    Route::get('/balances/data', [BalanceController::class, 'data'])->name('balances.data');
-    Route::post('/balances/recharge', [BalanceController::class, 'recharge'])->name('balances.recharge');
-    Route::resource('balances', BalanceController::class);
+    Route::get('/accounting/balances/data', [BalanceController::class, 'data'])->name('balances.data');
+    Route::post('/accounting/balances/recharge', [BalanceController::class, 'recharge'])->name('balances.recharge');
+    Route::resource('accounting/balances', BalanceController::class);
+
+    // Tax route
+    Route::get('/accounting/tax/index', [TaxRateController::class, 'index'])->name('tax.index');
+    Route::post('accounting/tax/store', [TaxRateController::class, 'store'])->name('tax.store');
 
     //Profile routes
     Route::put('profile/update', [ProfileController::class, 'update'])->name('user.profile.update');

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('rating');
             $table->longText('comment');
-            $table->foreignId('customer_id')->constrained();
+            $table->foreignId('customer_id')->constrained()->onDelete('cascade');
             // $table->foreignId('trip_id')->constrained();
             $table->timestamps();
         });

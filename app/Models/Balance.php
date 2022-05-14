@@ -9,9 +9,9 @@ class Balance extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['balance', 'tax', 'tax_rate', 'user_id', 'driver_id'];
+    protected $fillable = ['net_balance', 'balance', 'tax', 'tax_rate', 'tax_rate_id', 'user_id', 'driver_id'];
 
-    protected $casts = ['created_at' => 'datetime:Y-m-d h:m'];
+    protected $casts = ['created_at' => 'datetime:Y-m-d'];
 
     public function user()
     {
@@ -21,5 +21,10 @@ class Balance extends Model
     public function driver()
     {
         return $this->belongsTo(Driver::class);
+    }
+
+    public function taxRate()
+    {
+        return $this->belongsTo(TaxRate::class);
     }
 }
