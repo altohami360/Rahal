@@ -17,7 +17,7 @@ class TaxRateSeeder extends Seeder
     public function run()
     {
         TaxRate::create([
-            'tax_rate' => 0,
+            'tax_rate' => 9.99,
             'is_Active' => true
         ]);
     }
