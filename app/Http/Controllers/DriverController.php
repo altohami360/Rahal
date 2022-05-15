@@ -107,7 +107,7 @@ class DriverController extends Controller
         $driver->gender_id =                 $request->gender_id;
         $driver->birthday =                  $request->birthday;
         $driver->nationality_id =            $request->nationality_id;
-        $driver->service_id =                $request->service_id;
+        // $driver->service_id =                $request->service_id;
         $driver->car_id =                    $car_id;
         $driver->image =                     $this->checkImageRequest($request->file('image'), 'drivers/driver');
         $driver->identification_card_image = $this->checkImageRequest($request->file('identification_card_image'), 'drivers/card');
@@ -200,7 +200,7 @@ class DriverController extends Controller
         $driver->gender_id =                 $request->gender_id;
         $driver->birthday =                  $request->birthday;
         $driver->nationality_id =            $request->nationality_id;
-        $driver->service_id =                $request->service_id;
+        // $driver->service_id =                $request->service_id;
         $driver->is_active =                 $request->is_active? true : false;
         $driver->car_id =                    $car_id;
         $driver->image =                     $this->checkImageRequest($request->file('image'), 'drivers/driver');
